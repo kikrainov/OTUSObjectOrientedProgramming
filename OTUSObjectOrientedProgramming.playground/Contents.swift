@@ -46,12 +46,33 @@ class ExtendedUser: User {
 }
 
 class Moderator: ExtendedUser {
+    private var name: String
+    
+    init(nickname: String, isActive: Bool, projectSector: String, userHashSum: Int, name: String) {
+        self.name = name
+        super.init(nickname: nickname, isActive: isActive, projectSector: projectSector, userHashSum: userHashSum)
+    }
+    
+    fileprivate func getName() -> String {
+        return name
+    }
+    
+    fileprivate func setName(newValue: String) {
+        name = newValue
+    }
+    
     override fileprivate func showStatus() {
-        print("User \(nickname) is \(isActive). Moderator at \(projectSector). Hash is \(getUserHashSum())")
+        print("User \(nickname) is \(isActive). Name is \(name). Moderator at \(projectSector). Hash is \(getUserHashSum())")
     }
 }
 
-let defaultUser = User(nickname: "saurik", isActive: true, userHashSum: 6945684793786)
-let extUser1 = ExtendedUser(nickname: "appleseed", isActive: true, projectSector: "News", userHashSum: 59564864567457)
-let moder1 = Moderator(nickname: "Ive", isActive: false, projectSector: "Design", userHashSum: 59468479647)
+let defaultUser: User = User(nickname: "saurik", isActive: true, userHashSum: 6945684793786)
+let extUser1: User = ExtendedUser(nickname: "appleseed", isActive: true, projectSector: "News", userHashSum: 59564864567457)
+let moder1: User = Moderator(nickname: "Ive", isActive: false, projectSector: "Design", userHashSum: 59468479647, name: "Igor")
+let moder2: Moderator = Moderator(nickname: "jsteve", isActive: true, projectSector: "Prod", userHashSum: 5960479454, name: "Semyon")
 
+defaultUser.showStatus()
+extUser1.showStatus()
+moder1.showStatus()
+moder2.showStatus()
+moder2.getName()
